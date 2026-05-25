@@ -63,10 +63,11 @@ export function Footer() {
             </a>
             <Button 
               variant="outline" 
-              className="text-[13px] px-6 py-2 border-gold-400/50 text-cream hover:bg-gold-400/10 w-full sm:w-auto"
+              className="text-[13px] px-6 py-2 border-gold-400/50 text-cream hover:bg-gold-400/10 w-full sm:w-auto gap-2"
               onClick={() => window.open(getWhatsappLink(WHATSAPP_MESSAGES.geral), '_blank')}
             >
-              Agendar avaliação
+              <span>Agendar avaliação</span>
+              <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4 object-contain" />
             </Button>
           </div>
         </div>

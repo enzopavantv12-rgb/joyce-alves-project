@@ -6,6 +6,7 @@ export interface Testimonial {
   
   // Para vídeos:
   videoSrc?: string;
+  youtubeId?: string;
   posterSrc?: string;
   
   // Para depoimentos em texto:
@@ -22,21 +23,21 @@ export const testimonials: Testimonial[] = [
   {
     id: 'depoimento-1',
     type: 'video',
-    videoSrc: '/depoimentos/depoimento-insta-1.mov',
+    youtubeId: 'KS1x_BQYN9U',
     authorName: 'Angela',
     authorLocation: 'Belo Horizonte',
   },
   {
     id: 'depoimento-2',
     type: 'video',
-    videoSrc: '/depoimentos/depoimento-insta-2.mov',
+    youtubeId: 'KXbEAIahRyg',
     authorName: 'Patrícia',
     authorLocation: 'Pompéu',
   },
   {
     id: 'depoimento-3',
     type: 'video',
-    videoSrc: '/depoimentos/depoimento-insta-4.mp4',
+    youtubeId: 'ch7KaLaYBxM',
     authorName: 'Débora',
     authorLocation: 'Contagem',
   },

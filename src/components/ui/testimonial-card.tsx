@@ -18,7 +18,7 @@ export const TestimonialCard = ({
   onPlay,
   onPause
 }: TestimonialCardProps) => {
-
+  const originParam = typeof window !== 'undefined' ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -95,105 +95,202 @@ export const TestimonialCard = ({
       {/* CARD DE VÍDEO */}
       {testimonial.type === 'video' && (
         <div className="relative aspect-[3/4] bg-cocoa-700 h-full w-full">
-          {/* Vídeo */}
-          <video
-            ref={videoRef}
-            src={testimonial.videoSrc}
-            poster={testimonial.posterSrc}
-            className="absolute inset-0 w-full h-full object-cover"
-            preload="metadata"
-            playsInline
-            onEnded={handleVideoEnded}
-            aria-label={`Depoimento de ${testimonial.authorName}`}
-          />
-          
-          {/* Overlay quando vídeo não está tocando */}
-          {!isPlaying && (
-            <div className="
-              absolute inset-0 
-              bg-gradient-to-b from-cocoa-800/20 via-transparent to-cocoa-800/70
-              transition-opacity duration-500
-              pointer-events-none
-            " />
-          )}
-          
-          {/* Botão de Play/Pause central */}
-          <button
-            onClick={handlePlayToggle}
-            onKeyDown={handleKeyDown}
-            className="
-              absolute top-1/2 left-1/2
-              -translate-x-1/2 -translate-y-1/2
-              w-16 h-16 md:w-20 md:h-20
-              rounded-full
-              flex items-center justify-center
-              transition-all duration-500
-              group-hover:scale-110
-              focus:outline-none
-              focus-visible:ring-2 focus-visible:ring-gold-400
-              focus-visible:ring-offset-2
-            "
-            style={{
-              background: 'rgba(247, 243, 239, 0.20)',
-              backdropFilter: 'blur(20px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-              border: '1px solid rgba(247, 243, 239, 0.40)',
-              boxShadow: `
-                inset 0 1px 0 0 rgba(247, 243, 239, 0.3),
-                inset 0 -1px 0 0 rgba(58, 37, 25, 0.15),
-                0 8px 32px -4px rgba(0, 0, 0, 0.3)
-              `,
-              opacity: isPlaying ? 0 : 1,
-              pointerEvents: isPlaying ? 'none' : 'auto',
-            }}
-            aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir depoimento'}
-          >
-            {isPlaying ? (
-              <Pause className="w-6 h-6 text-cream fill-cream stroke-[1]" />
-            ) : (
-              <Play className="w-6 h-6 text-cream fill-cream stroke-[1] ml-1" />
-            )}
-          </button>
-          
-          {/* Pause invisível clicável quando vídeo está tocando */}
-          {isPlaying && (
-            <button
-              onClick={handlePlayToggle}
-              className="absolute inset-0 w-full h-full opacity-0 focus:outline-none"
-              aria-label="Pausar vídeo"
-            />
-          )}
-          
-          {/* Info do autor — overlay inferior */}
-          {!isPlaying && (
-            <div className="
-              absolute bottom-0 left-0 right-0
-              p-5 md:p-6
-              pointer-events-none
-            ">
-              <div className="
-                inline-flex flex-col gap-1
-                p-3 rounded-lg
-              "
-              style={{
-                background: 'rgba(58, 37, 25, 0.35)',
-                backdropFilter: 'blur(16px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                border: '1px solid rgba(247, 243, 239, 0.15)',
-              }}>
-                <span className="
-                  text-cream text-sm font-medium
-                  drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]
+          {testimonial.youtubeId ? (
+            <>
+              {isPlaying ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${testimonial.youtubeId}?autoplay=1&modestbranding=1&rel=0&playsinline=1${originParam}`}
+                  title={`Depoimento de ${testimonial.authorName}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              ) : (
+                <>
+                  <img
+                    src={testimonial.posterSrc || `https://img.youtube.com/vi/${testimonial.youtubeId}/hqdefault.jpg`}
+                    alt={`Depoimento de ${testimonial.authorName}`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    draggable={false}
+                    loading="lazy"
+                  />
+                  
+                  {/* Overlay quando vídeo não está tocando */}
+                  <div className="
+                    absolute inset-0 
+                    bg-gradient-to-b from-cocoa-800/20 via-transparent to-cocoa-800/70
+                    transition-opacity duration-500
+                    pointer-events-none
+                  " />
+                  
+                  {/* Botão de Play central */}
+                  <button
+                    onClick={handlePlayToggle}
+                    onKeyDown={handleKeyDown}
+                    className="
+                      absolute top-1/2 left-1/2
+                      -translate-x-1/2 -translate-y-1/2
+                      w-16 h-16 md:w-20 md:h-20
+                      rounded-full
+                      flex items-center justify-center
+                      transition-all duration-500
+                      group-hover:scale-110
+                      focus:outline-none
+                      focus-visible:ring-2 focus-visible:ring-gold-400
+                      focus-visible:ring-offset-2
+                    "
+                    style={{
+                      background: 'rgba(247, 243, 239, 0.20)',
+                      backdropFilter: 'blur(20px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                      border: '1px solid rgba(247, 243, 239, 0.40)',
+                      boxShadow: `
+                        inset 0 1px 0 0 rgba(247, 243, 239, 0.3),
+                        inset 0 -1px 0 0 rgba(58, 37, 25, 0.15),
+                        0 8px 32px -4px rgba(0, 0, 0, 0.3)
+                      `,
+                    }}
+                    aria-label={`Reproduzir depoimento de ${testimonial.authorName}`}
+                  >
+                    <Play className="w-6 h-6 text-cream fill-cream stroke-[1] ml-1" />
+                  </button>
+                  
+                  {/* Info do autor — overlay inferior */}
+                  <div className="
+                    absolute bottom-0 left-0 right-0
+                    p-5 md:p-6
+                    pointer-events-none
+                  ">
+                    <div className="
+                      inline-flex flex-col gap-1
+                      p-3 rounded-lg
+                    "
+                    style={{
+                      background: 'rgba(58, 37, 25, 0.35)',
+                      backdropFilter: 'blur(16px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                      border: '1px solid rgba(247, 243, 239, 0.15)',
+                    }}>
+                      <span className="
+                        text-cream text-sm font-medium
+                        drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]
+                      ">
+                        {testimonial.authorName}
+                      </span>
+                      <span className="
+                        text-cream/75 text-xs tracking-[0.15em] uppercase
+                      ">
+                        {testimonial.authorLocation}
+                      </span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {/* Vídeo Local */}
+              <video
+                ref={videoRef}
+                src={testimonial.videoSrc}
+                poster={testimonial.posterSrc}
+                className="absolute inset-0 w-full h-full object-cover"
+                preload="metadata"
+                playsInline
+                onEnded={handleVideoEnded}
+                aria-label={`Depoimento de ${testimonial.authorName}`}
+              />
+              
+              {/* Overlay quando vídeo não está tocando */}
+              {!isPlaying && (
+                <div className="
+                  absolute inset-0 
+                  bg-gradient-to-b from-cocoa-800/20 via-transparent to-cocoa-800/70
+                  transition-opacity duration-500
+                  pointer-events-none
+                " />
+              )}
+              
+              {/* Botão de Play/Pause central */}
+              <button
+                onClick={handlePlayToggle}
+                onKeyDown={handleKeyDown}
+                className="
+                  absolute top-1/2 left-1/2
+                  -translate-x-1/2 -translate-y-1/2
+                  w-16 h-16 md:w-20 md:h-20
+                  rounded-full
+                  flex items-center justify-center
+                  transition-all duration-500
+                  group-hover:scale-110
+                  focus:outline-none
+                  focus-visible:ring-2 focus-visible:ring-gold-400
+                  focus-visible:ring-offset-2
+                "
+                style={{
+                  background: 'rgba(247, 243, 239, 0.20)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(247, 243, 239, 0.40)',
+                  boxShadow: `
+                    inset 0 1px 0 0 rgba(247, 243, 239, 0.3),
+                    inset 0 -1px 0 0 rgba(58, 37, 25, 0.15),
+                    0 8px 32px -4px rgba(0, 0, 0, 0.3)
+                  `,
+                  opacity: isPlaying ? 0 : 1,
+                  pointerEvents: isPlaying ? 'none' : 'auto',
+                }}
+                aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir depoimento'}
+              >
+                {isPlaying ? (
+                  <Pause className="w-6 h-6 text-cream fill-cream stroke-[1]" />
+                ) : (
+                  <Play className="w-6 h-6 text-cream fill-cream stroke-[1] ml-1" />
+                )}
+              </button>
+              
+              {/* Pause invisível clicável quando vídeo está tocando */}
+              {isPlaying && (
+                <button
+                  onClick={handlePlayToggle}
+                  className="absolute inset-0 w-full h-full opacity-0 focus:outline-none"
+                  aria-label="Pausar vídeo"
+                />
+              )}
+              
+              {/* Info do autor — overlay inferior */}
+              {!isPlaying && (
+                <div className="
+                  absolute bottom-0 left-0 right-0
+                  p-5 md:p-6
+                  pointer-events-none
                 ">
-                  {testimonial.authorName}
-                </span>
-                <span className="
-                  text-cream/75 text-xs tracking-[0.15em] uppercase
-                ">
-                  {testimonial.authorLocation}
-                </span>
-              </div>
-            </div>
+                  <div className="
+                    inline-flex flex-col gap-1
+                    p-3 rounded-lg
+                  "
+                  style={{
+                    background: 'rgba(58, 37, 25, 0.35)',
+                    backdropFilter: 'blur(16px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                    border: '1px solid rgba(247, 243, 239, 0.15)',
+                  }}>
+                    <span className="
+                      text-cream text-sm font-medium
+                      drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]
+                    ">
+                      {testimonial.authorName}
+                    </span>
+                    <span className="
+                      text-cream/75 text-xs tracking-[0.15em] uppercase
+                    ">
+                      {testimonial.authorLocation}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       )}

@@ -50,9 +50,10 @@ export function FinalCTA() {
           
           <Button 
             onClick={handleCTA}
-            className="bg-gold-400 text-cocoa-800 hover:bg-gold-300 border-none text-[16px] px-10 py-5 mb-6"
+            className="bg-gold-400 text-cocoa-800 hover:bg-gold-300 border-none text-[16px] px-10 py-5 mb-6 gap-3"
           >
-            Agendar minha avaliação
+            <span>Agendar minha avaliação</span>
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
           </Button>
 
           <p className="text-[13px] text-cream/60">

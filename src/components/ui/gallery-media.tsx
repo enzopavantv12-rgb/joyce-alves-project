@@ -57,6 +57,8 @@ export const GalleryMedia = ({
     return () => observer.disconnect();
   }, [item.type, prefersReducedMotion]);
 
+  const originParam = typeof window !== 'undefined' ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
+
   return (
     <motion.div
       ref={containerRef}
@@ -121,24 +123,43 @@ export const GalleryMedia = ({
             />
           )}
           
-          {isInView && (
-            <video
-              ref={videoRef}
-              src={item.src}
-              poster={item.poster}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className={`
-                w-full h-full object-cover
-                transition-all duration-1000
-                ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'}
-                group-hover:scale-[1.04]
-              `}
-              onLoadedData={() => setIsLoaded(true)}
-              aria-label={item.alt}
-            />
+          {item.youtubeId ? (
+            isInView && (
+              <iframe
+                src={`https://www.youtube.com/embed/${item.youtubeId}?controls=1&modestbranding=1&rel=0&playsinline=1${originParam}`}
+                title={item.alt}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className={`
+                  absolute inset-0 w-full h-full object-cover
+                  transition-all duration-1000
+                  ${isLoaded ? 'opacity-100' : 'opacity-0'}
+                `}
+                style={{ border: 'none' }}
+                onLoad={() => setIsLoaded(true)}
+              />
+            )
+          ) : (
+            isInView && (
+              <video
+                ref={videoRef}
+                src={item.src}
+                poster={item.poster}
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className={`
+                  w-full h-full object-cover
+                  transition-all duration-1000
+                  ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'}
+                  group-hover:scale-[1.04]
+                `}
+                onLoadedData={() => setIsLoaded(true)}
+                aria-label={item.alt}
+              />
+            )
           )}
           
           {/* Indicador discreto de vídeo (canto inferior direito) */}

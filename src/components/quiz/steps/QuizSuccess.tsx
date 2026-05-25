@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowUpRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 import type { QuizAnswers } from '../../../hooks/useQuiz';
 import { QUIZ_STEPS } from '../../../lib/quizData';
 
@@ -86,7 +86,7 @@ Aguardo seu retorno!`;
         className="inline-flex items-center gap-3 px-8 py-4 bg-cocoa-700 text-cream text-sm tracking-[0.15em] uppercase font-medium hover:bg-cocoa-800 transition-all duration-300 font-body"
       >
         <span>Abrir WhatsApp</span>
-        <ArrowUpRight className="w-4 h-4 stroke-1" />
+        <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
       </button>
     </motion.div>
   );

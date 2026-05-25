@@ -89,8 +89,9 @@ export function Journey() {
           variants={fadeUp}
           className="mt-20 md:mt-32 text-center"
         >
-          <Button onClick={handleCTA} className="px-10">
-            Quero começar minha jornada
+          <Button onClick={handleCTA} className="px-10 gap-3">
+            <span>Quero começar minha jornada</span>
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
           </Button>
         </motion.div>
       </Container>

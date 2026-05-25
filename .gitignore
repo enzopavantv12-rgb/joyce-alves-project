@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw assets and backup folders
+depoimentos/
+experiencia-local/
+imagens site/
+imagens-Rejuvenescimento/
+imagens-antes-depois/
+limpeza-pele/
+servicos/
+sobre-mim/
+

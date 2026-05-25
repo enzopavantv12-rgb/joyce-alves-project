@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Search, Sparkles, Leaf, HeartHandshake, ArrowRight } from 'lucide-react';
+import { Search, Sparkles, Leaf, HeartHandshake } from 'lucide-react';
 import Balancer from 'react-wrap-balancer';
 import { useQuiz } from '../../../hooks/useQuiz';
 
@@ -254,7 +254,7 @@ export function Method() {
               "
             >
               <span>Conhecer minha jornada</span>
-              <ArrowRight className="w-4 h-4 stroke-1" />
+              <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
             </button>
           </motion.div>
         </motion.div>

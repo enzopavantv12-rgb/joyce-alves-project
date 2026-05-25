@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
 import { getWhatsappLink, WHATSAPP_MESSAGES } from '../../lib/whatsapp';
 import { trackEvent } from '../../lib/analytics';
 
@@ -34,7 +33,7 @@ export function FloatingWhatsApp() {
           onClick={handleClick}
           className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[40] flex items-center gap-3 bg-cocoa-700 hover:bg-cocoa-600 text-cream px-6 py-4 rounded-full shadow-custom hover:-translate-y-1 transition-all duration-300 group"
         >
-          <MessageCircle className="w-5 h-5 text-gold-400 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+          <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain group-hover:scale-110 transition-transform" />
           <span className="font-medium text-[14px] tracking-wide">Falar com Joyce</span>
         </motion.button>
       )}

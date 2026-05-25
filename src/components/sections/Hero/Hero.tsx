@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { trackEvent } from "../../../lib/analytics";
 import { cn } from "../../../lib/utils";
 import { useQuiz } from "../../../hooks/useQuiz";
@@ -107,7 +106,7 @@ export function Hero() {
               className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cream/10 backdrop-blur-md border border-cream/20 text-cream text-base font-medium hover:bg-cream/15 hover:border-cream/40 transition-all duration-500"
             >
               <span>Agendar minha avaliação</span>
-              <ArrowUpRight className="w-4 h-4 stroke-1" />
+              <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
             </button>
           </motion.div>
           

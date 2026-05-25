@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Flower2, ArrowUpRight } from 'lucide-react';
+import { Flower2 } from 'lucide-react';
 import { Container } from '../../ui/Container';
 import { getWhatsappLink, WHATSAPP_MESSAGES } from '../../../lib/whatsapp';
 import { trackEvent } from '../../../lib/analytics';
@@ -55,7 +55,7 @@ export function Promise() {
             className="flex items-center gap-3 px-8 py-4 rounded-full border border-gold-300 text-sm md:text-base font-medium text-gold-300 hover:bg-gold-300 hover:text-[#6E4B3A] transition-all duration-300"
           >
             <span>Agendar Avaliação</span>
-            <ArrowUpRight className="w-4 h-4 stroke-[1.5]" />
+            <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
           </button>
         </motion.div>
       </Container>

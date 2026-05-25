@@ -89,9 +89,10 @@ export function FloatingNav() {
                 ))}
                 <Button 
                   onClick={() => window.open(getWhatsappLink(WHATSAPP_MESSAGES.geral), '_blank')}
-                  className="px-6 py-2.5 text-[14px]"
+                  className="px-6 py-2.5 text-[14px] gap-2"
                 >
-                  Agendar avaliação
+                  <span>Agendar avaliação</span>
+                  <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4 object-contain" />
                 </Button>
               </div>
 
@@ -140,9 +141,10 @@ export function FloatingNav() {
               <div className="w-16 h-px bg-gold-400 my-4" />
               <Button 
                 onClick={() => window.open(getWhatsappLink(WHATSAPP_MESSAGES.geral), '_blank')}
-                className="w-full max-w-[280px]"
+                className="w-full max-w-[280px] gap-3"
               >
-                Agendar avaliação
+                <span>Agendar avaliação</span>
+                <img src="/whatsapp.png" alt="WhatsApp" className="w-5 h-5 object-contain" />
               </Button>
             </div>
           </motion.div>
