@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-cream text-ink font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-hero {
+    @apply text-[clamp(2.75rem,5vw+1rem,5.5rem)] leading-[1.05] font-light font-display;
+  }
+  .text-display-1 {
+    @apply text-[clamp(2.25rem,4vw+1rem,4rem)] leading-[1.1] font-light font-display;
+  }
+  .text-display-2 {
+    @apply text-[clamp(1.75rem,3vw+1rem,2.75rem)] leading-[1.15] font-light font-display;
+  }
+  .text-eyebrow {
+    @apply text-[clamp(0.6875rem,1vw+0.5rem,0.75rem)] leading-[1.4] font-medium font-body uppercase tracking-[0.25em];
+  }
+  .text-lead {
+    @apply text-[clamp(1.0625rem,1.5vw+0.5rem,1.1875rem)] leading-[1.6] font-normal font-body;
+  }
+  .text-body {
+    @apply text-[clamp(0.9375rem,1vw+0.5rem,1rem)] leading-[1.7] font-normal font-body;
+  }
+  .text-small {
+    @apply text-[clamp(0.8125rem,1vw+0.5rem,0.875rem)] leading-[1.5] font-normal font-body;
+  }
+  .text-quote {
+    @apply text-[clamp(1.375rem,2vw+0.5rem,2rem)] leading-[1.4] font-normal italic font-display;
+  }
+}
+
+/* Liquid Glass utilities */
+
+.liquid-glass-container {
+  transform: translateZ(0); /* Força GPU */
+  backface-visibility: hidden;
+  will-change: auto;
+}
+
+.liquid-glass-container.is-dragging {
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  /* Reduz scale do feDisplacementMap via CSS e simplifica filtros */
+  .liquid-glass-handle,
+  .liquid-glass-badge,
+  .liquid-glass-divider {
+    filter: none !important;
+  }
+  .liquid-glass-handle {
+    backdrop-filter: blur(18px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+  }
+  .liquid-glass-badge {
+    backdrop-filter: blur(12px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  }
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+  .liquid-glass-container * {
+    filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(58, 37, 25, 0.7) !important;
+  }
+}
+
+/* Transparency overrides for light sections to show global background pattern */
+section.bg-cream,
+section.bg-ivory {
+  background-color: transparent !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
